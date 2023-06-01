@@ -7,6 +7,7 @@ import Home from "../../pages/Home";
 import Settings from "../../pages/Settings";
 import Favorites from "../../pages/Favorites";
 import Profile from "../../pages/Profile";
+import Login from "../../pages/Login";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -42,6 +43,14 @@ export default function Navbar() {
         component={Settings}
         options={{
           tabBarLabel: "Settings",
+          tabBarIcon: () => <AntDesign name="setting" size={26} />,
+        }}
+      />
+      <Tab.Screen
+        name="Login"
+        component={Login}
+        options={{
+          tabBarLabel: "Login",
           tabBarIcon: () => <AntDesign name="setting" size={26} />,
         }}
       />
