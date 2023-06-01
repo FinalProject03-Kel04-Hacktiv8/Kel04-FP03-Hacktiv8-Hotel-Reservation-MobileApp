@@ -12,30 +12,52 @@ export default function Login() {
 
   return (
     <SafeAreaView>
-      <View>
-        <Text>Hello,</Text>
-        <Text>Welcome Back!</Text>
-        <Text>Enter your credentials to continue.</Text>
-        <View>
-          <Text>Email</Text>
+      <View className="px-5 py-20">
+        <Text 
+          className="text-3xl font-semibold">
+          Hello,
+        </Text>
+        <Text 
+          className="text-3xl font-semibold">
+          Welcome Back!
+        </Text>
+
+        <Text className="text-slate-500 text-base mb-12 mt-2">
+          Enter your credentials to continue.
+        </Text>
+
+        <View className="mb-6">
+          <Text className="mb-2 font-medium">
+            Email
+          </Text>
           <TextInput
-          placeholder="input your email"
+          className="border border-slate-300 px-3 py-2 rounded-md focus:border-2 focus:border-[#2596be]"
+          placeholder="Input your email"
           defaultValue={email}
           onChangeText={setEmail}
         />
         </View>
-        <View>
-          <Text>Password</Text>
+
+        <View className="mb-6">
+          <Text className="mb-2 font-medium">
+            Password
+          </Text>
           <TextInput
-          placeholder="input your email"
+          className="border border-slate-300 px-3 py-2 rounded-md focus:border-2 focus:border-[#2596be]"
+          placeholder="Input your email"
           defaultValue={password}
           onChangeText={setPassword}
         />
         </View>
+
         <TouchableHighlight
+          className="p-3 bg-[#2596be] rounded-md"
           onPress={handleOnSubmit}
         >
-          <Text>Login</Text>
+          <Text 
+          className="text-center text-white font-medium tracking-wider">
+            Login
+          </Text>
         </TouchableHighlight>
       </View>
     </SafeAreaView>
