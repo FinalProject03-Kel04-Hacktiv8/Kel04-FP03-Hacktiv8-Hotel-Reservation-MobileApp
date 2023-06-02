@@ -1,13 +1,19 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text, TouchableHighlight, TextInput } from "react-native";
 import { useState } from "react";
+import { userLogin } from "../../redux/slices/auth-slice";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  
+  const auth = useSelector((state) => state.auth);
 
-  const handleOnSubmit = () => {
-    console.warn(email, password);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleUserLogin = () => {
+    dispatch(userLogin({email, password}));
   }
 
   return (
@@ -52,13 +58,17 @@ export default function Login() {
 
         <TouchableHighlight
           className="p-3 bg-[#2596be] rounded-md"
-          onPress={handleOnSubmit}
+          onPress={handleUserLogin}
         >
           <Text 
           className="text-center text-white font-medium tracking-wider">
             Login
           </Text>
         </TouchableHighlight>
+        <View>
+          {auth.loading && <Text>Loading...</Text>}
+          {auth.error && <Text>{auth.error}</Text>}
+        </View>
       </View>
     </SafeAreaView>
   );
