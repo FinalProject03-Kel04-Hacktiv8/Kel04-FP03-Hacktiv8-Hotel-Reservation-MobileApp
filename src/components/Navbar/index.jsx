@@ -8,10 +8,13 @@ import Settings from "../../pages/Settings";
 import Favorites from "../../pages/Favorites";
 import Profile from "../../pages/Profile";
 import ProtectedRoute from "../ProtectedRoute";
+import { useSelector } from "react-redux";
 
 const Tab = createMaterialBottomTabNavigator();
 
 export default function Navbar() {
+  const auth = useSelector((state) => state.auth);
+
   return (
     <Tab.Navigator>
       <Tab.Screen
@@ -43,19 +46,16 @@ export default function Navbar() {
           </ProtectedRoute>
         )}
       </Tab.Screen>
-      <Tab.Screen
-        name="Settings"
-        options={{
-          tabBarLabel: "Settings",
-          tabBarIcon: () => <AntDesign name="setting" size={26} />,
-        }}
-      >
-        {() => (
-          <ProtectedRoute>
-            <Settings />
-          </ProtectedRoute>
-        )}
-      </Tab.Screen>
+      {auth?.token &&
+        <Tab.Screen
+          name="Settings"
+          component={Settings}
+          options={{
+            tabBarLabel: "Settings",
+            tabBarIcon: () => <AntDesign name="setting" size={26} />,
+          }}
+        />
+      }
     </Tab.Navigator>
   );
 }
