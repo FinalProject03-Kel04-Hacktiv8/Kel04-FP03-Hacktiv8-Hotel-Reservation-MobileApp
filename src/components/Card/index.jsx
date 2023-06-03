@@ -36,7 +36,7 @@ export default function Card({ item }) {
           color="#facc15" />
           <AntDesign 
           name="star" 
-          color="#475569"
+          color="#cbd5e1"
           size={12} />
         </View>
         <Text 
