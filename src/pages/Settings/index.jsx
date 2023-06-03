@@ -5,11 +5,15 @@ import { StatusBar } from "expo-status-bar";
 import { useSelector, useDispatch } from "react-redux";
 import { userLogout, profileUpdate } from "../../redux/slices/auth-slice";
 import { useNavigation } from '@react-navigation/native';
+import { Appbar, Dialog, Portal } from "react-native-paper";
+import { useState } from "react";
 
 
 export default function Settings() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
+  const [visible, setVisible] = useState(false);
 
   const user = useSelector((state) => state.auth.user);
 
@@ -19,63 +23,94 @@ export default function Settings() {
 
   const handleUserLogout = () => {
     dispatch(userLogout());
-    return navigation.navigate("Home");
+    navigation.navigate("Home");
+    setVisible(false);
   }
 
   return (
-    <SafeAreaView className="p-5 bg-slate-100 flex-1">
-      <View className="bg-white p-5 rounded-lg">
-          <Text 
-            className="text-lg font-medium">
-              My Account
+    <>
+      <Appbar.Header>
+        <Appbar.BackAction onPress={() => navigation.goBack()} />
+        <Appbar.Content title="Settings" />
+      </Appbar.Header>
+      <SafeAreaView className="px-5">
+        <View className="bg-white p-5 rounded-lg">
+            <Text 
+              className="text-lg font-medium">
+                My Account
+            </Text>
+            <View 
+              className="flex-row items-center justify-between border-b border-slate-200 py-3">
+              <Text>First Name</Text>
+              <TextInput
+                defaultValue={user.firstName}
+                onChangeText={(text) => handleInputChange(text, "firstName")}
+              />
+            </View>
+            <View 
+              className="flex-row items-center justify-between border-b border-slate-200 py-3">
+              <Text>Last Name</Text>
+              <TextInput
+                defaultValue={user.lastName}
+                onChangeText={(text) => handleInputChange(text, "lastName")}
+              />
+            </View>
+            <View 
+              className="flex-row items-center justify-between border-b border-slate-200 py-3">
+              <Text>Email</Text>
+              <TextInput
+                defaultValue={user.email}
+                onChangeText={(text) => handleInputChange(text, "email")}
+              />
+            </View>
+            <View 
+              className="flex-row items-center justify-between border-b border-slate-200 py-3">
+              <Text>Gender</Text>
+              <TextInput
+                defaultValue={user.gender}
+              />
+            </View>
+            <View 
+              className="flex-row items-center justify-between border-b border-slate-200 py-3">
+              <Text>Age</Text>
+              <TextInput
+                defaultValue={user.age}
+              />
+            </View>
+          <StatusBar style="auto" />
+        </View>
+        <View className="bg-white mt-5 p-5 rounded-lg">
+          <Text className="text-lg font-medium">Support</Text>
+          <Text className="py-5 border-b border-slate-200">
+            Term & Policy
           </Text>
-          <View 
-            className="flex-row items-center justify-between border-b border-slate-200 py-3">
-            <Text>First Name</Text>
-            <TextInput
-              defaultValue={user.firstName}
-              onChangeText={(text) => handleInputChange(text, "firstName")}
-            />
-          </View>
-          <View 
-            className="flex-row items-center justify-between border-b border-slate-200 py-3">
-            <Text>Last Name</Text>
-            <TextInput
-              defaultValue={user.lastName}
-              onChangeText={(text) => handleInputChange(text, "lastName")}
-            />
-          </View>
-          <View 
-            className="flex-row items-center justify-between border-b border-slate-200 py-3">
-            <Text>Email</Text>
-            <TextInput
-              defaultValue={user.email}
-              onChangeText={(text) => handleInputChange(text, "email")}
-            />
-          </View>
-          <View 
-            className="flex-row items-center justify-between border-b border-slate-200 py-3">
-            <Text>Gender</Text>
-            <TextInput
-              defaultValue={user.gender}
-            />
-          </View>
-          <View 
-            className="flex-row items-center justify-between border-b border-slate-200 py-3">
-            <Text>Age</Text>
-            <TextInput
-              defaultValue={user.age}
-            />
-          </View>
           <TouchableOpacity 
             className="mt-5"
-            onPress={handleUserLogout}>
+            onPress={() => setVisible(true)}>
             <Text className="text-red-600 font-medium active:text-red-500">
               Logout
             </Text>
           </TouchableOpacity>
-        <StatusBar style="auto" />
-      </View>
-    </SafeAreaView>
+        </View>
+        <Portal>
+          <Dialog visible={visible}>
+            <Dialog.Icon icon="alert" />
+            <Dialog.Title className="text-center text-lg">Are You sure, you want to logout?</Dialog.Title>
+            <Dialog.Content className="flex-row justify-center gap-x-5">
+              <TouchableOpacity
+                className="bg-red-500 px-8 py-1.5 rounded-md"
+                onPress={() => setVisible(false)}>
+                <Text className="text-white">No</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                className="bg-green-500 px-8 py-1.5 rounded-md"
+                onPress={handleUserLogout}>
+                <Text className="text-white">Yes</Text>
+              </TouchableOpacity>
+            </Dialog.Content>
+          </Dialog>
+        </Portal>
+      </SafeAreaView>
+    </>
   );
 }
