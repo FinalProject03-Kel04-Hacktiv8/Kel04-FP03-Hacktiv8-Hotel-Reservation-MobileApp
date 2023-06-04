@@ -1,5 +1,5 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import { View, Text, TouchableHighlight, TextInput } from "react-native";
+import { View, Text, TouchableHighlight, TextInput, Image } from "react-native";
 import { useState } from "react";
 import { userLogin } from "../../redux/slices/auth-slice";
 import { useSelector, useDispatch } from "react-redux";
@@ -18,9 +18,9 @@ export default function Login() {
 
   return (
     <SafeAreaView>
-      <View className="px-5 py-20">
+      <View className="px-5 py-16">
         <Text 
-          className="text-3xl font-semibold">
+          className="text-3xl text-[#9450e7] font-semibold">
           Hello,
         </Text>
         <Text 
@@ -37,7 +37,7 @@ export default function Login() {
             Email
           </Text>
           <TextInput
-          className="border border-slate-300 px-3 py-2 rounded-md focus:border-2 focus:border-[#2596be]"
+          className="bg-slate-200 border border-slate-300 px-3 py-2 rounded-md focus:bg-transparent focus:border-2 focus:border-[#9450e7]"
           placeholder="Input your email"
           defaultValue={email}
           onChangeText={setEmail}
@@ -49,8 +49,8 @@ export default function Login() {
             Password
           </Text>
           <TextInput
-          className="border border-slate-300 px-3 py-2 rounded-md focus:border-2 focus:border-[#2596be]"
-          placeholder="Input your email"
+          className="bg-slate-200 border border-slate-300 px-3 py-2 rounded-md focus:bg-transparent focus:border-2 focus:border-[#9450e7]"
+          placeholder="Input your password"
           defaultValue={password}
           onChangeText={setPassword}
           secureTextEntry={true}
@@ -58,7 +58,7 @@ export default function Login() {
         </View>
 
         <TouchableHighlight
-          className="p-3 bg-[#2596be] rounded-md"
+          className="p-3 bg-[#9450e7] rounded-md"
           onPress={handleUserLogin}
         >
           <Text 
@@ -66,10 +66,15 @@ export default function Login() {
             Login
           </Text>
         </TouchableHighlight>
-        <View>
-          {auth.loading && <Text>Loading...</Text>}
-          {auth.error && <Text>{auth.error}</Text>}
-        </View>
+        {auth.loading &&
+          <View className="flex-1 absolute -top-10 right-0 left-0 -bottom-20 bg-white m-0 z-50 justify-center items-center">
+            <Image
+              className="-mt-10"
+              source={require("../../assetsStayDoors/loading.gif")}
+            />
+          </View>
+        }
+        {auth.error && <Text className="text-red-500 mt-3">{auth.error}</Text>}
       </View>
     </SafeAreaView>
   );
