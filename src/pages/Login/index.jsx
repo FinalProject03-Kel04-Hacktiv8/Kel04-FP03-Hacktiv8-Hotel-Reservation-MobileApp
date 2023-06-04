@@ -3,6 +3,7 @@ import { View, Text, TouchableHighlight, TextInput, Image, ActivityIndicator } f
 import { useState } from "react";
 import { userLogin } from "../../redux/slices/auth-slice";
 import { useSelector, useDispatch } from "react-redux";
+import { FontAwesome } from "react-native-vector-icons";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -11,9 +12,14 @@ export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [secureTextEntry, setSecureTextEntry] = useState(true);
 
   const handleUserLogin = () => {
     dispatch(userLogin({email, password}));
+  }
+
+  const handleSecureTextEntry = () => {
+    setSecureTextEntry(!secureTextEntry);
   }
 
   return (
@@ -37,7 +43,7 @@ export default function Login() {
             Email
           </Text>
           <TextInput
-          className="bg-slate-200 border border-slate-300 px-3 py-2 rounded-md focus:bg-transparent focus:border-2 focus:border-[#9450e7]"
+          className="bg-slate-200 border border-slate-300 px-3 py-2 rounded-md focus:bg-transparent focus:border-2 focus:border-[#9450e7] text-slate-700"
           placeholder="Input your email"
           defaultValue={email}
           onChangeText={setEmail}
@@ -48,13 +54,23 @@ export default function Login() {
           <Text className="mb-2 font-medium">
             Password
           </Text>
-          <TextInput
-          className="bg-slate-200 border border-slate-300 px-3 py-2 rounded-md focus:bg-transparent focus:border-2 focus:border-[#9450e7]"
-          placeholder="Input your password"
-          defaultValue={password}
-          onChangeText={setPassword}
-          secureTextEntry={true}
-        />
+          <View className="relative">
+            <TextInput
+              className="bg-slate-200 border border-slate-300 pl-3 pr-10 py-2 rounded-md focus:bg-transparent focus:border-2 focus:border-[#9450e7] text-slate-700"
+              placeholder="Input your password"
+              defaultValue={password}
+              onChangeText={setPassword}
+              secureTextEntry={secureTextEntry}
+            />
+            {password !== "" &&
+              <FontAwesome
+                className="absolute top-3 right-3 text-slate-600"
+                onPress={handleSecureTextEntry}
+                name={secureTextEntry ? "eye-slash" : "eye"}
+                size={20}
+              />
+            }
+          </View>
         </View>
 
         <TouchableHighlight
