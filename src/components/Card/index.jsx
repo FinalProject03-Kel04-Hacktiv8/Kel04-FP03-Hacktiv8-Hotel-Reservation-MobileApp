@@ -1,5 +1,6 @@
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { Text, View, Image } from "react-native";
+import Rates from "../Rates";
 
 export default function Card({ item }) {
   return (
@@ -17,28 +18,10 @@ export default function Card({ item }) {
         <Text className="text-slate-600">
           Senggigi, Lombok.
         </Text>
-        <View className="flex-row mt-3">
-          <AntDesign 
-            name="star" 
-            size={12}
-            color="#facc15" />
-          <AntDesign 
-            name="star" 
-            size={12}
-            color="#facc15" />
-          <AntDesign 
-            name="star" 
-            size={12}
-            color="#facc15" />
-          <AntDesign 
-          name="star" 
-          size={12}
-          color="#facc15" />
-          <AntDesign 
-          name="star" 
-          color="#cbd5e1"
-          size={12} />
-        </View>
+        <Rates
+          className="flex-row mt-3"
+          rates={7.8}
+        />
         <Text 
           className="absolute bottom-0 right-0 text-base font-medium">
           Rp.5000

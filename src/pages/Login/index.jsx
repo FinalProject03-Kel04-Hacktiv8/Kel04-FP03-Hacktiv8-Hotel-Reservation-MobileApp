@@ -53,6 +53,7 @@ export default function Login() {
           placeholder="Input your email"
           defaultValue={password}
           onChangeText={setPassword}
+          secureTextEntry={true}
         />
         </View>
 
