@@ -10,7 +10,19 @@ export default function ProtectedRoute({ children }) {
   if (!token) {
     return (
       <Stack.Navigator>
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen 
+          name="Login" 
+          component={Login}
+          options={{
+            title: "Login",
+            headerStyle: {
+              backgroundColor: "#9450e7"
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              textAlign: "center"
+            }
+          }} />
       </Stack.Navigator>
     );
   }

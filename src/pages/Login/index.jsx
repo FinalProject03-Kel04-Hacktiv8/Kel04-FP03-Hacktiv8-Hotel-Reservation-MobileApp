@@ -1,5 +1,5 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import { View, Text, TouchableHighlight, TextInput, Image } from "react-native";
+import { View, Text, TouchableHighlight, TextInput, Image, ActivityIndicator } from "react-native";
 import { useState } from "react";
 import { userLogin } from "../../redux/slices/auth-slice";
 import { useSelector, useDispatch } from "react-redux";
@@ -61,19 +61,17 @@ export default function Login() {
           className="p-3 bg-[#9450e7] rounded-md"
           onPress={handleUserLogin}
         >
-          <Text 
-          className="text-center text-white font-medium tracking-wider">
-            Login
-          </Text>
+          {auth.loading ?
+            <View className="flex-row justify-center gap-x-3">
+              <ActivityIndicator size="small"  color="#fff" />
+              <Text className="text-white">Processing...</Text>
+            </View> :
+            <Text 
+              className="text-center text-white font-medium tracking-wider">
+              Login
+            </Text>
+          }
         </TouchableHighlight>
-        {auth.loading &&
-          <View className="flex-1 absolute -top-10 right-0 left-0 -bottom-20 bg-white m-0 z-50 justify-center items-center">
-            <Image
-              className="-mt-10"
-              source={require("../../assetsStayDoors/loading.gif")}
-            />
-          </View>
-        }
         {auth.error && <Text className="text-red-500 mt-3">{auth.error}</Text>}
       </View>
     </SafeAreaView>
