@@ -95,17 +95,24 @@ export default function Settings() {
         <Portal>
           <Dialog visible={visible}>
             <Dialog.Icon icon="alert" />
-            <Dialog.Title className="text-center text-lg">Are You sure, you want to logout?</Dialog.Title>
-            <Dialog.Content className="flex-row justify-center gap-x-5">
+            <Dialog.Title className="text-center">
+              Are you sure?
+            </Dialog.Title>
+            <Dialog.Content>
+              <Text variant="bodyMedium" className="text-center">
+                Do you want to logout
+              </Text>
+            </Dialog.Content>
+            <Dialog.Content className="flex-row justify-center gap-x-10">
               <TouchableOpacity
-                className="bg-red-500 px-8 py-1.5 rounded-md"
+                className="border-2 border-[#9450e7] px-8 py-1.5 rounded-md"
                 onPress={() => setVisible(false)}>
-                <Text className="text-white">No</Text>
+                <Text className="text-[#9450e7] font-medium">No</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                className="bg-green-500 px-8 py-1.5 rounded-md"
+                className="bg-[#9450e7] px-8 py-1.5 rounded-md"
                 onPress={handleUserLogout}>
-                <Text className="text-white">Yes</Text>
+                <Text className="text-white font-medium">Yes</Text>
               </TouchableOpacity>
             </Dialog.Content>
           </Dialog>
