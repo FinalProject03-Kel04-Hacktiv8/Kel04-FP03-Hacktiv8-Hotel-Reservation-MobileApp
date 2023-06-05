@@ -1,19 +1,18 @@
 import { View, Text, TextInput, TouchableOpacity} from "react-native";
 import React from "react";
-import { StatusBar } from "expo-status-bar";
 import { useSelector, useDispatch } from "react-redux";
 import { userLogout, profileUpdate } from "../../redux/slices/auth-slice";
 import { useNavigation } from '@react-navigation/native';
-import { Appbar, Dialog, Portal, List } from "react-native-paper";
+import { Appbar, List, Portal } from "react-native-paper";
 import { useState } from "react";
+import LogoutPopup from "../../components/LogoutPopup";
 
 export default function Settings() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
   const [visible, setVisible] = useState(false);
-
-  const [expanded, setExpanded] = React.useState(true);
+  const [expanded, setExpanded] = useState(true);
 
   const user = useSelector((state) => state.auth.user);
 
@@ -23,6 +22,10 @@ export default function Settings() {
   }
 
   const handlePress = () => setExpanded(!expanded);
+
+  const handleShowPopupConfirmation = (state) => {
+    setVisible(state);
+  }
 
   const handleUserLogout = () => {
     dispatch(userLogout());
@@ -91,7 +94,6 @@ export default function Settings() {
               defaultValue={user.age}
             />
           </View>
-          <StatusBar style="auto" />
         </View>
         <View className="bg-white mt-5 p-5 rounded-lg">
           <Text className="text-lg font-medium">Support</Text>
@@ -100,38 +102,19 @@ export default function Settings() {
           </Text>
           <TouchableOpacity 
             className="mt-5"
-            onPress={() => setVisible(true)}>
+            onPress={() => handleShowPopupConfirmation(true)}>
             <Text className="text-red-600 font-medium active:text-red-500">
               Logout
             </Text>
           </TouchableOpacity>
         </View>
+        <Portal>
+          <LogoutPopup 
+            visible={visible}
+            showPopup={handleShowPopupConfirmation}
+            handleUserLogout={handleUserLogout} />
+        </Portal>
       </View>
-      <Portal>
-        <Dialog visible={visible}>
-          <Dialog.Icon icon="alert" />
-          <Dialog.Title className="text-center">
-            Are you sure?
-          </Dialog.Title>
-          <Dialog.Content>
-            <Text variant="bodyMedium" className="text-center">
-              Do you want to logout
-            </Text>
-          </Dialog.Content>
-          <Dialog.Content className="flex-row justify-center gap-x-10">
-            <TouchableOpacity
-              className="border-2 border-[#9450e7] px-8 py-1.5 rounded-md"
-              onPress={() => setVisible(false)}>
-              <Text className="text-[#9450e7] font-medium">No</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              className="bg-[#9450e7] px-8 py-1.5 rounded-md"
-              onPress={handleUserLogout}>
-              <Text className="text-white font-medium">Yes</Text>
-            </TouchableOpacity>
-          </Dialog.Content>
-        </Dialog>
-      </Portal>
     </View>
   );
 }
