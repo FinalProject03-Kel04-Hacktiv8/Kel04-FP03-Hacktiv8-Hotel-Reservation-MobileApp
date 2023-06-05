@@ -49,6 +49,7 @@ export default function Settings() {
             className="flex-row items-center justify-between border-b border-slate-200 py-3">
             <Text>First Name</Text>
             <TextInput
+              className="w-1/2 text-right focus:border-2 focus:border-[#9450e7] py-1 rounded-md focus:pr-3"
               defaultValue={user.firstName}
               onChangeText={(text) => handleInputChange(text, "firstName")}
             />
@@ -57,6 +58,7 @@ export default function Settings() {
             className="flex-row items-center justify-between border-b border-slate-200 py-3">
             <Text>Last Name</Text>
             <TextInput
+              className="w-1/2 text-right focus:border-2 focus:border-[#9450e7] py-1 rounded-md focus:pr-3"
               defaultValue={user.lastName}
               onChangeText={(text) => handleInputChange(text, "lastName")}
             />
@@ -65,11 +67,12 @@ export default function Settings() {
             className="flex-row items-center justify-between border-b border-slate-200 py-3">
             <Text>Email</Text>
             <TextInput
+              className="w-1/2 text-right focus:border-2 focus:border-[#9450e7] py-1 rounded-md focus:pr-3"
               defaultValue={user.email}
               onChangeText={(text) => handleInputChange(text, "email")}
             />
           </View>
-          <List.Section className="w-full border-b border-slate-200 py-3 flex-row justify-between">
+          <List.Section className="w-full border-b border-slate-200 flex-row justify-between items-start">
             <List.Subheader className="px-0 text-black">Gender</List.Subheader>
             <List.Accordion
               className="p-0 w-[100px]"
@@ -88,9 +91,11 @@ export default function Settings() {
             </List.Accordion>
           </List.Section>
           <View 
-            className="flex-row items-center justify-between border-b border-slate-200 py-3">
+            className="flex-row items-center justify-between border-b border-slate-200 py-2">
             <Text>Age</Text>
             <TextInput
+              className="w-1/2 text-right focus:border-2 focus:border-[#9450e7] py-1 rounded-md focus:pr-3"
+              onPress={(text) => handleInputChange(text, "age")}
               defaultValue={user.age}
             />
           </View>
