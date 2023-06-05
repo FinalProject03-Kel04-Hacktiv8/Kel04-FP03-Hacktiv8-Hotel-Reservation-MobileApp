@@ -1,11 +1,12 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import { View, Text, TouchableHighlight, TextInput, Image, ActivityIndicator } from "react-native";
+import { View, Text, TouchableHighlight, TextInput, ActivityIndicator } from "react-native";
 import { useState } from "react";
 import { userLogin } from "../../redux/slices/auth-slice";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesome } from "react-native-vector-icons";
+import { Appbar } from "react-native-paper";
 
-export default function Login() {
+export default function Login({ navigation }) {
   const dispatch = useDispatch();
   
   const auth = useSelector((state) => state.auth);
@@ -23,7 +24,11 @@ export default function Login() {
   }
 
   return (
-    <SafeAreaView>
+    <>
+      <Appbar.Header style={{backgroundColor: '#9450e7'}}>
+        <Appbar.BackAction onPress={() => navigation.goBack()} color="#fff" />
+        <Appbar.Content title="Login" color="#fff" />
+      </Appbar.Header>
       <View className="px-5 py-16">
         <Text 
           className="text-3xl text-[#9450e7] font-semibold">
@@ -90,6 +95,6 @@ export default function Login() {
         </TouchableHighlight>
         {auth.error && <Text className="text-red-500 mt-3">{auth.error}</Text>}
       </View>
-    </SafeAreaView>
+    </>
   );
 }
