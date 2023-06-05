@@ -2,14 +2,14 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const authLogin = ({ email, password }) => {
   return new Promise((resolve, reject) => {
-    if (email === "johndoe@gmail.com" && password === "johndoe123") {
+    if (email === "johnd@gmail.com" && password === "johnd123") {
       const data = {
         user: {
           firstName: "John",
           lastName: "Doe",
           gender: "Male",
           age: "20",
-          email: "johndoe@gmail.com",
+          email: "johnd@gmail.com",
         },
         token: "login"
       }
