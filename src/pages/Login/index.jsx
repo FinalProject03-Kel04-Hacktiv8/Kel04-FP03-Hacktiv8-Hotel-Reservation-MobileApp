@@ -9,7 +9,7 @@ import { Appbar } from "react-native-paper";
 export default function Login({ navigation, route }) {
   const dispatch = useDispatch();
 
-  const { prevRoute } = route.params;
+  const { prevRoute } = route?.params || "Home";
   
   const auth = useSelector((state) => state.auth);
 
