@@ -1,19 +1,32 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text, TouchableHighlight, TextInput, ActivityIndicator } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { userLogin } from "../../redux/slices/auth-slice";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesome } from "react-native-vector-icons";
 import { Appbar } from "react-native-paper";
 
-export default function Login({ navigation }) {
+export default function Login({ navigation, route }) {
   const dispatch = useDispatch();
+
+  const { prevRoute } = route.params;
   
   const auth = useSelector((state) => state.auth);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [secureTextEntry, setSecureTextEntry] = useState(true);
+
+  useEffect(() => {
+    if (auth.token) {
+      if (prevRoute === "Detail") {
+        return navigation.navigate(/* page booking */)
+      }
+  
+      return navigation.navigate("Home");
+    }
+
+  }, [auth.token]);
 
   const handleUserLogin = () => {
     dispatch(userLogin({email, password}));
