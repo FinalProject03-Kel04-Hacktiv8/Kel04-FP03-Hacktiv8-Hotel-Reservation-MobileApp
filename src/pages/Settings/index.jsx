@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity} from "react-native";
+import { View, Text, TextInput, TouchableOpacity, ScrollView} from "react-native";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { userLogout, profileUpdate } from "../../redux/slices/auth-slice";
@@ -12,7 +12,7 @@ export default function Settings() {
   const navigation = useNavigation();
 
   const [visible, setVisible] = useState(false);
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
 
   const user = useSelector((state) => state.auth.user);
 
@@ -34,7 +34,7 @@ export default function Settings() {
   }
 
   return (
-    <View>
+    <ScrollView>
       <Appbar.Header style={{backgroundColor: '#9450e7'}}>
         <Appbar.BackAction onPress={() => navigation.goBack()} color="#fff" />
         <Appbar.Content title="Settings" color="#fff" />
@@ -120,6 +120,6 @@ export default function Settings() {
             handleUserLogout={handleUserLogout} />
         </Portal>
       </View>
-    </View>
+    </ScrollView>
   );
 }
