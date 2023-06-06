@@ -6,8 +6,8 @@ import { StatusBar } from "expo-status-bar";
 export default function Favorites() {
   return (
     <SafeAreaView className="flex-1 justify-center px-2">
-      <View className="relative border-2 h-80">
-        <Text className="font-bold absolute bottom-0">Favorite</Text>
+      <View className="relative border-2 items-center h-80">
+        <Text className="font-bold absolute">Favorite</Text>
         <StatusBar style="auto" />
       </View>
     </SafeAreaView>
