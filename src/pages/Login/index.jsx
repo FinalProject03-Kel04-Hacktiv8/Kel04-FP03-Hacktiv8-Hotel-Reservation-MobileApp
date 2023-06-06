@@ -1,7 +1,7 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text, TouchableHighlight, TextInput, ActivityIndicator } from "react-native";
 import { useState, useEffect } from "react";
-import { userLogin } from "../../redux/slices/auth-slice";
+import { userLogin, userAuthenticated } from "../../redux/slices/auth-slice";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesome } from "react-native-vector-icons";
 import { Appbar } from "react-native-paper";
@@ -9,7 +9,7 @@ import { Appbar } from "react-native-paper";
 export default function Login({ navigation, route }) {
   const dispatch = useDispatch();
 
-  const { prevRoute } = route?.params || "Home";
+  const prevRoute = route?.params?.prevRoute || "Home";
   
   const auth = useSelector((state) => state.auth);
 
@@ -20,10 +20,12 @@ export default function Login({ navigation, route }) {
   useEffect(() => {
     if (auth.token) {
       if (prevRoute === "Detail") {
-        return navigation.navigate(/* page booking */)
+        navigation.navigate(/* boking page */);
+      } else {
+        navigation.navigate(prevRoute);
       }
   
-      return navigation.navigate("Home");
+      dispatch(userAuthenticated(true));
     }
 
   }, [auth.token]);

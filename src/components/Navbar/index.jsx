@@ -33,7 +33,7 @@ export default function Navbar() {
           tabBarIcon: () => <MaterialIcons name="favorite" size={26} />,
         }}
       />
-      {auth.token ? 
+      {auth.isAuthenticated ? 
         (
           <>
             <Tab.Screen

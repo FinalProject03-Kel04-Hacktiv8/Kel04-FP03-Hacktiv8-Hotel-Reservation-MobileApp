@@ -18,6 +18,10 @@ const authLogin = ({ email, password }) => {
         resolve(data);
       }, 2000);
 
+      setTimeout(() => {
+        resolve({isAuthenticated: true});
+      }, 2500);
+
     } else {
       setTimeout(() => {
         reject("Invalid email and password");
@@ -39,6 +43,7 @@ export const userLogin = createAsyncThunk("auth/login", async ({email, password}
 
 const initialState = {
   loading: false,
+  isAuthenticated: false,
   token: null,
   user: {},
   error: null,
@@ -50,9 +55,13 @@ const authSlice = createSlice({
   reducers: {
     userLogout: (state) => {
       state.loading = false,
+      state.isAuthenticated = false,
       state.token = null;
-      state.user = {},
-      state.error = null
+      state.user = {};
+      state.error = null;
+    },
+    userAuthenticated: (state, action) => {
+      state.isAuthenticated = action.payload;
     },
     profileUpdate: (state, action) => {
       const {text, name} = action.payload;
@@ -68,9 +77,11 @@ const authSlice = createSlice({
       state.error = null;
     })
     .addCase(userLogin.fulfilled, (state, action) => {
+      const {token, user} = action.payload;
+      
       state.loading = false;
-      state.token = action.payload.token;
-      state.user = action.payload.user;
+      state.token = token;
+      state.user = user;
     })
     .addCase(userLogin.rejected, (state, action) => {
       state.loading = false;
@@ -79,5 +90,5 @@ const authSlice = createSlice({
   }
 })
 
-export const { userLogout, profileUpdate } = authSlice.actions;
+export const { userLogout, userAuthenticated, profileUpdate } = authSlice.actions;
 export default authSlice.reducer;

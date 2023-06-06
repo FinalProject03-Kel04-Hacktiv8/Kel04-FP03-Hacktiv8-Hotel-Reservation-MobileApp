@@ -10,7 +10,7 @@ export default function Favorites({ navigation, route }) {
         <Text className="font-bold absolute bottom-0">Favorite</Text>
           <Button
             title="Login"
-            onPress={() => navigation.navigate("Login", {prevRoute: route})}
+            onPress={() => navigation.navigate("Login", {prevRoute: route.name})}
           />
         <StatusBar style="auto" />
       </View>
