@@ -22,11 +22,11 @@ export const ItemBooked = ({
         <Text className="font-bold" style={{ fontSize: 18 }}>{title}</Text>
         <Text style={{ fontSize: 16 }}>{location}</Text>
         <View className="flex-row items-center">
-          <FontAwesome name={createStar(1, 0.5)} color='orange' size={16} style={{ marginRight: 5 }} />
-          <FontAwesome name={createStar(2, 1.5)} color='orange' size={16} style={{ marginRight: 5 }} />
-          <FontAwesome name={createStar(3, 2.5)} color='orange' size={16} style={{ marginRight: 5 }} />
-          <FontAwesome name={createStar(4, 3.5)} color='orange' size={16} style={{ marginRight: 5 }} />
-          <FontAwesome name={createStar(5, 4.5)} color='orange' size={16} style={{ marginRight: 5 }} />
+          <FontAwesome name={createStar(2, 1)} color='orange' size={16} style={{ marginRight: 5 }} />
+          <FontAwesome name={createStar(4, 3)} color='orange' size={16} style={{ marginRight: 5 }} />
+          <FontAwesome name={createStar(6, 5)} color='orange' size={16} style={{ marginRight: 5 }} />
+          <FontAwesome name={createStar(8, 7)} color='orange' size={16} style={{ marginRight: 5 }} />
+          <FontAwesome name={createStar(10, 9)} color='orange' size={16} style={{ marginRight: 5 }} />
           <Text className="ml-2">{rate}</Text>
         </View>
       </View>
