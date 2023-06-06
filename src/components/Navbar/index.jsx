@@ -1,14 +1,12 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import Home from "../../pages/Home";
-import Settings from "../../pages/Settings";
 import Favorites from "../../pages/Favorites";
+import Home from "../../pages/Home";
 import Profile from "../../pages/Profile";
 import { useSelector } from "react-redux";
 import Login from "../../pages/Login";
+import Settings from "../../pages/Settings";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -22,7 +20,7 @@ export default function Navbar() {
         component={Home}
         options={{
           tabBarLabel: "Home",
-          tabBarIcon: () => <MaterialCommunityIcons name="home" size={26} />,
+          tabBarIcon: () => <AntDesign name="home" size={26} />,
         }}
       />
       <Tab.Screen
@@ -30,7 +28,7 @@ export default function Navbar() {
         component={Favorites}
         options={{
           tabBarLabel: "Favorite",
-          tabBarIcon: () => <MaterialIcons name="favorite" size={26} />,
+          tabBarIcon: () => <MaterialIcons name="favorite-border" size={26} />,
         }}
       />
       {auth.isAuthenticated ? 
@@ -63,14 +61,6 @@ export default function Navbar() {
             }}
           />
       )}
-      {/* <Tab.Screen
-        name="Settings"
-        component={Settings}
-        options={{
-          tabBarLabel: "Settings",
-          tabBarIcon: () => <AntDesign name="setting" size={26} />,
-        }}
-      /> */}
     </Tab.Navigator>
   );
 }

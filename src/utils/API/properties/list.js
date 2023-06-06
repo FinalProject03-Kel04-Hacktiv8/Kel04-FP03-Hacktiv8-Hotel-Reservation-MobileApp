@@ -1,4 +1,4 @@
-const List = (checkIn, checkOut) => {
+const List = (checkIn, checkOut, dest_ids, dest_type, guest_qty) => {
   return {
     method: "GET",
     url: "https://apidojo-booking-v1.p.rapidapi.com/properties/list",
@@ -6,10 +6,10 @@ const List = (checkIn, checkOut) => {
       offset: "0",
       arrival_date: checkIn,
       departure_date: checkOut,
-      guest_qty: "1",
-      dest_ids: "-3712125",
+      guest_qty: guest_qty,
+      dest_ids: dest_ids,
       room_qty: "1",
-      search_type: "city",
+      search_type: dest_type,
       children_qty: "2",
       children_age: "5,7",
       search_id: "none",
@@ -19,7 +19,8 @@ const List = (checkIn, checkOut) => {
       travel_purpose: "leisure",
     },
     headers: {
-      "X-RapidAPI-Key": "ea6aeccecfmsh462cd66551e7c98p199b79jsn435518c78694",
+      "X-RapidAPI-Key": "31cbb47e4cmsh598a33d934b86e8p153ef7jsn36f2066cbe7d",
+      // "X-RapidAPI-Key": "b347bc0983mshe9d646e8a29ed83p1b05b4jsn708feff2a216",
       "X-RapidAPI-Host": "apidojo-booking-v1.p.rapidapi.com",
     },
   };

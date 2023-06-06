@@ -5,6 +5,7 @@ import listReducer from "../slices/slice-list";
 import authReducer from "../slices/auth-slice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import userReducer from "../slices/user-slice";
+import searchReducer from "../slices/slice-search";
 
 const persistConfig = {
   key: "root",
@@ -14,7 +15,8 @@ const persistConfig = {
 const rootReducers = combineReducers({
   list: listReducer,
   auth: authReducer,
-  user: userReducer
+  user: userReducer,
+  search: searchReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducers)
