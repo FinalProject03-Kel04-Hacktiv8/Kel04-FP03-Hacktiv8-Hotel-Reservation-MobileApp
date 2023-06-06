@@ -63,6 +63,14 @@ export default function Navbar() {
             }}
           />
       )}
+      {/* <Tab.Screen
+        name="Settings"
+        component={Settings}
+        options={{
+          tabBarLabel: "Settings",
+          tabBarIcon: () => <AntDesign name="setting" size={26} />,
+        }}
+      /> */}
     </Tab.Navigator>
   );
 }

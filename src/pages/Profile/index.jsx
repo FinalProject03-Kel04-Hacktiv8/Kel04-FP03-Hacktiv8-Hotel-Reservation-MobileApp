@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 export default function Profile() {
   const navigation = useNavigation();
 
-  const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.user);
 
   return (
     <>
@@ -24,7 +24,7 @@ export default function Profile() {
             <Image
               className="w-full h-full"
               source={{
-                uri: "https://yt3.googleusercontent.com/eLCADxKBRj3JGsifnxitZwfsbeV3DDlS3r8SzN5QPT2juw0fTV34T09vIZWfEF3D4JmV2z6hZA=s900-c-k-c0x00ffffff-no-rj"
+                uri: `${user.imgUrl}`
               }}
             />
           </View>

@@ -12,6 +12,7 @@ export default function Login({ navigation, route }) {
   const prevRoute = route?.params?.prevRoute || "Home";
   
   const auth = useSelector((state) => state.auth);
+  const user = useSelector((state) => state.user);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,7 +32,7 @@ export default function Login({ navigation, route }) {
   }, [auth.token]);
 
   const handleUserLogin = () => {
-    dispatch(userLogin({email, password}));
+    dispatch(userLogin({email, password, user}));
   }
 
   const handleSecureTextEntry = () => {
