@@ -1,18 +1,32 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-// import { composeWithDevTools } from "redux-devtools-extension";
+import { persistStore, persistReducer } from "redux-persist";
 import listReducer from "../slices/slice-list";
 import bookReducer from "../slices/slice-book";
+import searchReducer from "../slices/slice-search";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-let rootReducers = combineReducers({
+const persistConfig = {
+  key: "root",
+  storage: AsyncStorage,
+};
+
+const rootReducers = combineReducers({
   list: listReducer,
   booked: bookReducer,
+  search: searchReducer,
 });
 
-export const store = configureStore({
-  reducer: rootReducers,
+const persistedReducer = persistReducer(persistConfig, rootReducers);
+
+const store = configureStore({
+  reducer: persistedReducer,
   devTools: true,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
     }),
 });
+
+const persistor = persistStore(store);
+
+export { store, persistor };

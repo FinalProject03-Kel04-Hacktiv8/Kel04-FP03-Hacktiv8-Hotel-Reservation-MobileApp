@@ -1,35 +1,59 @@
 import { StatusBar } from "expo-status-bar";
-import { Text, TextInput, View, SafeAreaView, Button } from "react-native";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchDataList } from "../../redux/slices/slice-list";
-import List from "../../utils/API/properties/list";
+import * as React from "react";
+import { SafeAreaView, ScrollView, Text, View } from "react-native";
+import { useSelector } from "react-redux";
+import { popularPhotos } from "../../assetsStayDoors/popular-destPhotos";
+import { topPhotos } from "../../assetsStayDoors/top-destPhotos";
+import CardDestination from "../../components/Cards/card-destination";
+import CardOffers from "../../components/Cards/card-offers";
+import HeaderHome from "../../components/Header/header-home";
 
 export default function Home() {
-  const dispatch = useDispatch();
-  const listState = useSelector((state) => state.list.data);
+  const { data } = useSelector((state) => state.search);
+  const dataList = useSelector((state) => state.list.data);
 
-  let checkIn = "2023-06-01";
-  let checkOut = "2023-06-02";
-
-  const handleGetData = () => {
-    dispatch(fetchDataList(List(checkIn, checkOut)));
-    console.log(listState);
-  };
+  console.log("data search Home", data);
+  console.log("data list Home", dataList);
 
   return (
-    <SafeAreaView className="flex-1 justify-center px-2">
-      <View className="relative border-2 h-80">
-        <Text className="font-bold absolute bottom-0">Yeay, Udah bisa!</Text>
-        <TextInput />
-        <Button
-          onPress={handleGetData}
-          title="GetData"
-          color="#841584"
-          accessibilityLabel="Learn more about this purple button"
-        />
-        <StatusBar style="auto" />
-      </View>
-    </SafeAreaView>
+    <View>
+      <HeaderHome />
+
+      <ScrollView>
+        <SafeAreaView className="px-2">
+          <CardDestination />
+          <Text className="text-[16px] font-bold mt-8">TOP DESTINATIONS</Text>
+          <ScrollView horizontal={true}>
+            <View className="flex-1 flex-row my-3">
+              {topPhotos.map((destination, index) => (
+                <CardOffers
+                  img={destination.img}
+                  id={destination.id}
+                  name={destination.name}
+                  key={index}
+                />
+              ))}
+            </View>
+          </ScrollView>
+          <Text className="text-[16px] font-bold mt-5">
+            POPULAR DESTINATIONS
+          </Text>
+          <ScrollView horizontal={true}>
+            <View className="flex-1 flex-row my-3">
+              {popularPhotos.map((destination, index) => (
+                <CardOffers
+                  img={destination.img}
+                  name={destination.name}
+                  key={index}
+                />
+              ))}
+            </View>
+          </ScrollView>
+          <Text className="text-[16px] font-bold mt-5 mb-2 h-40">HOTELS</Text>
+        </SafeAreaView>
+      </ScrollView>
+
+      <StatusBar style="auto" />
+    </View>
   );
 }
