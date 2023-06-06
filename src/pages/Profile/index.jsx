@@ -1,5 +1,5 @@
 import { View, Text, Image, FlatList, ScrollView } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import Card from "../../components/Card";
@@ -7,10 +7,15 @@ import { useSelector } from "react-redux";
 import { Appbar } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 
-export default function Profile() {
+export default function Profile({}) {
   const navigation = useNavigation();
 
   const user = useSelector((state) => state.user);
+  const auth = useSelector((state) => state.auth);
+
+  if (!auth.token) {
+    return navigation.push("Login");
+  }
 
   return (
     <>

@@ -56,7 +56,7 @@ export default function Navbar() {
             name="Login"
             component={Login}
             options={{
-              tabBarLabel: "Login",
+              tabBarLabel: "Sign In",
               tabBarIcon: () => <MaterialIcons name="login" size={26} />,
             }}
           />
