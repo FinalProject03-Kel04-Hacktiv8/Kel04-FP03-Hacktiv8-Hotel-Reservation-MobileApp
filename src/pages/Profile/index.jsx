@@ -51,6 +51,7 @@ export default function Profile() {
                   rate={item.data.rate}
                   currency={item.data.currency}
                   price={item.data.price}
+                  guest={item.data.guest}
                 />
               ))
               : <Text className="text-base text-center mt-5">Your booking appear here.</Text>

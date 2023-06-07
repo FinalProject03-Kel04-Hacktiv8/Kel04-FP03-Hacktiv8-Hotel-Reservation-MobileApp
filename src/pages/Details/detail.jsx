@@ -4,6 +4,7 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 import {
   ActivityIndicator,
   Appbar,
+  Button,
   MD2Colors,
   Paragraph,
 } from "react-native-paper";
@@ -43,6 +44,7 @@ export default function Detail() {
       currency,
       rates,
       reviews,
+      Guest,
     });
   };
 
@@ -141,7 +143,7 @@ export default function Detail() {
 
       {/* This button for testing only */}
       <Button
-        className="mx-2 mt-10"
+        className="mx-5 mt-10"
         id="btncheckout"
         buttonColor={"#1B9C85"}
         textColor={"#fff"}

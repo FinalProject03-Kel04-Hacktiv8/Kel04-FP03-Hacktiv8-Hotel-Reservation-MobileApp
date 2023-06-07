@@ -21,7 +21,10 @@ export const BookingPage = () => {
     currency,
     price,
     rates,
+    Guest,
   } = route.params
+  const total = (Number(price) * Guest)
+  const payable = (Number(total) * (5 / 100)).toLocaleString()
   let data = {
     id: +new Date(),
     img: imgHotel,
@@ -29,7 +32,8 @@ export const BookingPage = () => {
     location: city,
     rate: rates,
     currency: currency,
-    price: price,
+    price: total,
+    guest: Guest,
   }
   const dispatch = useDispatch()
 
@@ -96,16 +100,16 @@ export const BookingPage = () => {
             </View>
           </View>
           <View>
-            <Text className="font-bold my-5" style={{ fontSize: 16 }}>PRICE SUMMARY</Text>
+            <Text className="font-bold my-5 text-base">PRICE SUMMARY</Text>
             <View className="bg-white p-4 rounded-xl">
-              <Text className="font-bold mb-4">3 days, 1 Room, 2 Guest</Text>
+              <Text className="font-bold mb-4">1 days, 1 Room, {Guest} Guest</Text>
               <View className="flex-row items-center justify-between border-b border-gray-200 pb-3 mb-3">
                 <Text>Total</Text>
-                <Text className="font-bold" style={{ fontSize: 16, color: '#1B9C85' }}>$ 534,67</Text>
+                <Text className="font-bold text-base" style={{ color: '#1B9C85' }}>{currency} {total.toLocaleString()}</Text>
               </View>
               <View className="flex-row items-center justify-between">
                 <Text>Payable Now</Text>
-                <Text className="font-bold" style={{ fontSize: 16, color: '#1B9C85' }}>$ 22,50</Text>
+                <Text className="font-bold text-base" style={{ color: '#1B9C85' }}>{currency} {payable}</Text>
               </View>
             </View>
           </View>

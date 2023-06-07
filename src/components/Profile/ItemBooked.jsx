@@ -8,7 +8,8 @@ export const ItemBooked = ({
   location,
   rate,
   currency,
-  price
+  price,
+  guest,
 }) => {
   const createStar = (num, numFloat) => Number(rate) < num ? Number(rate) < numFloat ? "star-o" : "star-half-o" : "star"
 
@@ -21,7 +22,7 @@ export const ItemBooked = ({
       }} className="rounded-xl" />
       <View className="flex-1 justify-between pl-3">
         <Text numberOfLines={1} className="font-bold text-lg">{title}</Text>
-        <Text numberOfLines={1} className="text-base mb-1">{location}</Text>
+        <Text numberOfLines={1} className="text-sm mb-1">{location}</Text>
         <View className="flex-row items-center">
           <FontAwesome name={createStar(2, 1)} color='orange' size={16} style={{ marginRight: 5 }} />
           <FontAwesome name={createStar(4, 3)} color='orange' size={16} style={{ marginRight: 5 }} />
@@ -30,12 +31,10 @@ export const ItemBooked = ({
           <FontAwesome name={createStar(10, 9)} color='orange' size={16} style={{ marginRight: 5 }} />
           <Text className="ml-2">{rate}</Text>
         </View>
-        <View className="mt-1">
-          <Text className="font-bold text-xl" style={{ color: '#1B9C85' }}>
-            {currency} {Number(price).toLocaleString()}
-            <Text className="text-xs text-black leading-7"> /per night</Text>
-          </Text>
-        </View>
+        <Text className="font-bold text-base mt-1" style={{ color: '#1B9C85' }}>
+          {currency} {Number(price).toLocaleString()}
+          <Text className="text-xs text-black leading-7"> /per night ({guest} Guest)</Text>
+        </Text>
       </View>
     </View>
   )
