@@ -4,8 +4,6 @@ import { Card, Text } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDataLocation } from "../../redux/slices/slice-search";
 import searchLocations from "../../utils/API/search/locations";
-import { fetchDataList } from "../../redux/slices/slice-list";
-import List from "../../utils/API/properties/list";
 
 export default function CardOffers({ img, name }) {
   const dispatch = useDispatch();
