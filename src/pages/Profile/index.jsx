@@ -10,9 +10,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 export default function Profile() {
   const booked = useSelector((state) => state.booked.booked);
   const user = useSelector((state) => state.user);
-  const auth = useSelector((state) => state.auth);
   const navigation = useNavigation();
-  console.log(auth.token);
 
   useEffect(() => {}, [booked]);
 

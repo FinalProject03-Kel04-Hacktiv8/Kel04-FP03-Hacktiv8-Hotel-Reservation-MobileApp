@@ -2,10 +2,10 @@ import { useNavigation, useRoute } from "@react-navigation/core";
 import React, { useState } from "react";
 import { Image, TouchableOpacity, View } from "react-native";
 import { Appbar, Button, Paragraph, Text } from "react-native-paper";
-import AntDesign from "react-native-vector-icons/AntDesign";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { useSelector } from "react-redux";
 
 export default function Detail() {
   const [showFullText, setShowFullText] = useState(false);
@@ -14,12 +14,21 @@ export default function Detail() {
   const { nameHotel, city, imgHotel, price, currency, rates, reviews, Guest } =
     route.params;
 
+  const auth = useSelector((state) => state.auth);
+
   // Change This tobe your actions
   const handleBack = () => {
     navigation.navigate("Home");
   };
 
   const handleBooking = () => {
+    if (!auth.token) {
+      return navigation.navigate("Login", {
+        prevRoute: route.name,
+        ...route.params,
+      });
+    }
+
     navigation.navigate("Booking", {
       nameHotel,
       city,
