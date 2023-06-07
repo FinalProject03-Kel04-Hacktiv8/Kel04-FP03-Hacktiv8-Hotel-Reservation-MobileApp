@@ -20,7 +20,7 @@ export default function ListHotels() {
   const navigation = useNavigation();
   const route = useRoute();
   const { searchQuery, id } = route.params;
-
+  const guest = 2;
   // Change This tobe your actions
   const handleBack = () => {
     navigation.navigate("Home");
@@ -51,7 +51,7 @@ export default function ListHotels() {
                 checkOut,
                 (dest_ids = dataSearch.data[0]?.dest_id),
                 (dest_type = dataSearch.data[0]?.dest_type),
-                (guest_qty = 1)
+                (guest_qty = guest)
               )
             )
           );
@@ -130,6 +130,7 @@ export default function ListHotels() {
                 currency={hotel?.price_breakdown?.currency}
                 reviews={hotel?.review_score_word}
                 rates={hotel?.review_score}
+                Guest={guest}
               />
             ))
           )}

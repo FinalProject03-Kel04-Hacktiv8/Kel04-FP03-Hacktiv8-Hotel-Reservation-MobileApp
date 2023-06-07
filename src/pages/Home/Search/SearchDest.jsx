@@ -167,6 +167,7 @@ export default function SearchDest() {
                   currency={hotel?.price_breakdown?.currency}
                   reviews={hotel?.review_score_word}
                   rates={hotel?.review_score}
+                  Guest={Number(Guest)}
                 />
               ))
             )}
