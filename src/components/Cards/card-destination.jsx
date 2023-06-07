@@ -1,6 +1,6 @@
 import * as React from "react";
 import { SafeAreaView, StyleSheet, ScrollView, View } from "react-native";
-import { Button, TextInput } from "react-native-paper";
+import { Button, HelperText, Text, TextInput } from "react-native-paper";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useDispatch, useSelector } from "react-redux";
 import searchLocations from "../../utils/API/search/locations";
@@ -9,8 +9,9 @@ import { useNavigation } from "@react-navigation/core";
 import { fetchDataLocation } from "../../redux/slices/slice-search";
 
 export default function CardDestination() {
-  const [text, setText] = React.useState();
+  const [text, setText] = React.useState("");
   const [value, setValue] = React.useState("");
+  const [alert, setAlert] = React.useState(false);
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ export default function CardDestination() {
     console.log("idSearch", text.toLowerCase());
     console.log("Fetching data...");
     // Fetch search
+
     dispatch(fetchDataLocation(searchLocations(text.toLowerCase())));
 
     console.log("DataSearch fetched!");
@@ -33,9 +35,13 @@ export default function CardDestination() {
     });
   };
 
+  const handleErrors = () => {
+    return setAlert(true);
+  };
+
   return (
     <View
-      className="relative h-72 rounded-lg p-3 bg-slate-50 mt-3"
+      className="relative min-h-72 rounded-lg p-3 bg-slate-50 mt-3"
       style={{ elevation: 12 }}
     >
       <ScrollView>
@@ -76,11 +82,16 @@ export default function CardDestination() {
             left={<TextInput.Icon icon="account-multiple-outline" />}
             style={styles.inputText}
           />
+          {alert === false || value != "" ? (
+            ""
+          ) : (
+            <Text>Please input your guest!</Text>
+          )}
         </SafeAreaView>
 
         {/* Button Search */}
         <Button
-          onPress={handleSearch}
+          onPress={!value ? handleErrors : handleSearch}
           icon={() => {
             return <AntDesign name="search1" size={18} color={"#27374D"} />;
           }}

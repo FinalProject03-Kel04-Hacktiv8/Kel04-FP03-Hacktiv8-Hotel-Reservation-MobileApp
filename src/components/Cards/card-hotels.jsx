@@ -13,6 +13,7 @@ export default function CardHotels({
   currency,
   rates,
   reviews,
+  Guest,
 }) {
   let hotelPhoto =
     imgHotel ??
@@ -31,6 +32,7 @@ export default function CardHotels({
       currency,
       rates,
       reviews,
+      Guest,
     });
   };
 

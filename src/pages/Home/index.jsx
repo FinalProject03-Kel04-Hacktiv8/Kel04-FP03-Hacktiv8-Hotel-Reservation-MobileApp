@@ -18,7 +18,6 @@ export default function Home() {
   return (
     <View>
       <HeaderHome />
-
       <ScrollView>
         <SafeAreaView className="px-2">
           <CardDestination />
