@@ -8,7 +8,6 @@ import Navbar from "./src/components/Navbar";
 import SearchDest from "./src/pages/Home/Search/SearchDest";
 import ListHotels from "./src/pages/Home/listHotels";
 import Detail from "./src/pages/Details/detail";
-import Login from "./src/pages/Login";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -39,11 +38,6 @@ export default function App() {
                   component={Detail}
                   options={{ headerShown: false }}
                 />
-                {/* <Stack.Screen
-                  name="Login"
-                  component={Login}
-                  options={{ headerShown: false }}
-                /> */}
               </Stack.Group>
             </Stack.Navigator>
           </NavigationContainer>
