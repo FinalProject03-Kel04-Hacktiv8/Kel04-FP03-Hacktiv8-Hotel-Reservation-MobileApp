@@ -24,7 +24,7 @@ export default function Login({ route }) {
   useEffect(() => {
     if (auth.token) {
       if (prevRoute === "Detail") {
-        navigation.navigate(/* boking page */);
+        navigation.navigate("Booking", {...route.params});
       } else {
         navigation.navigate(prevRoute);
       }

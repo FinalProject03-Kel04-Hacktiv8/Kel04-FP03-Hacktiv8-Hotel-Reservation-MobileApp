@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react"
 import { View, Text, TextInput } from "react-native"
 import { Appbar, Button } from "react-native-paper"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { onHandleCheckout } from "../../redux/slices/slice-book"
 import { useNavigation, useRoute } from "@react-navigation/core"
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 
 export const BookingPage = () => {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [country, setCountry] = useState('')
-  const [phone, setPhone] = useState('')
+  const user = useSelector((state) => state.user);
+  const [name, setName] = useState(`${user.firstName} ${user.lastName}`);
+  const [email, setEmail] = useState(user.email)
+  const [country, setCountry] = useState(user.phone.slice(0, 3));
+  const [phone, setPhone] = useState(user.phone.split("+62").join(""))
   const [checkoutStatus, setCheckoutStatus] = useState(false)
   const navigation = useNavigation()
   const route = useRoute()
@@ -23,6 +24,7 @@ export const BookingPage = () => {
     rates,
     Guest,
   } = route.params
+
   const total = (Number(price) * Guest)
   const payable = (Number(total) * (5 / 100)).toLocaleString()
   let data = {

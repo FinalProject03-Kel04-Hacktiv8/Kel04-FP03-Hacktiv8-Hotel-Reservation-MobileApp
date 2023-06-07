@@ -93,7 +93,7 @@ export default function Settings() {
               className="w-1/2 text-right focus:border-2 focus:border-[#9450e7] py-1 rounded-md focus:pr-3 text-base"
               defaultValue={user.phone}
               keyboardType="numeric"
-              onChangeText={(text) => handleInputChange(text, "age")}
+              onChangeText={(text) => handleInputChange(text, "phone")}
             />
           </View>
           <List.Section className="w-full border-b border-slate-200 flex-row justify-between items-start">
