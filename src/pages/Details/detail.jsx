@@ -29,6 +29,8 @@ export default function Detail() {
   const route = useRoute();
   const { nameHotel, city, imgHotel, price, currency, rates, reviews, Guest } =
     route.params;
+  
+  const auth = useSelector((state) => state.auth);
 
   // Change This tobe your actions
   const handleBack = () => {
@@ -36,6 +38,13 @@ export default function Detail() {
   };
 
   const handleBooking = () => {
+    if (!auth.token) {
+      return navigation.navigate("Login", {
+        prevRoute: route.name,
+        ...route.params
+      });
+    }
+
     navigation.navigate("Booking", {
       nameHotel,
       city,

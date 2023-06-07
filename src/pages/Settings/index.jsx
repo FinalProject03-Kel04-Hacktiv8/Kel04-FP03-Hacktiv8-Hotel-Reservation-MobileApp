@@ -87,12 +87,13 @@ export default function Settings() {
             />
           </View>
           <View 
-            className="flex-row items-center justify-between border-b border-slate-200 py-2">
-            <Text className="text-base">Age</Text>
+            className="flex-row items-center justify-between border-b border-slate-200 py-3">
+            <Text className="text-base">Phone</Text>
             <TextInput
               className="w-1/2 text-right focus:border-2 focus:border-[#9450e7] py-1 rounded-md focus:pr-3 text-base"
-              defaultValue={user.age}
-              onChangeText={(text) => handleInputChange(text, "age")}
+              defaultValue={user.phone}
+              keyboardType="numeric"
+              onChangeText={(text) => handleInputChange(text, "phone")}
             />
           </View>
           <List.Section className="w-full border-b border-slate-200 flex-row justify-between items-start">

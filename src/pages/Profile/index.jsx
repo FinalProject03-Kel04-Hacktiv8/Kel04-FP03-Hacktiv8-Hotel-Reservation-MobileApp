@@ -12,11 +12,11 @@ export default function Profile() {
   const user = useSelector(state => state.user);
   const auth = useSelector(state => state.auth);
   const navigation = useNavigation();
-  console.log(auth.token);
+  // console.log(auth.token);
 
-  if (!auth.token) {
-    return navigation.push("Login");
-  }
+  // if (!auth.token) {
+  //   return navigation.push("Login");
+  // }
 
   useEffect(() => { }, [booked])
 
