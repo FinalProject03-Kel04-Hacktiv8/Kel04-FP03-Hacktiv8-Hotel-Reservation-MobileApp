@@ -2,27 +2,50 @@ import React, { useEffect } from "react";
 import { View, Text, ScrollView, Image } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { ItemBooked } from "../../components/Profile/ItemBooked";
-import { AppBarHeader } from "../../components/Profile/AppBarHeader";
 import { useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/core";
+import { Appbar } from "react-native-paper";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 
 export default function Profile() {
   const booked = useSelector(state => state.booked.booked)
+  const user = useSelector(state => state.user);
+  const auth = useSelector(state => state.auth);
+  const navigation = useNavigation();
+  console.log(auth.token);
+
+  if (!auth.token) {
+    return navigation.push("Login");
+  }
 
   useEffect(() => { }, [booked])
 
   return (
     <ScrollView>
-      <AppBarHeader title="Profile" />
-      <View className="py-5 px-3">
+      <Appbar.Header>
+        <Appbar.Action icon="keyboard-backspace" onPress={() => navigation.navigate("Home")} />
+        <Appbar.Content
+          title={
+            <Text className="text-lg">
+              <MaterialCommunityIcons name="cards-outline" size={26} />
+              <Text className="text-purple-700 font-semibold">Profile</Text>
+            </Text>
+          }
+          mode="center-aligned"
+          style={{ alignItems: "center" }}
+        />
+        <Appbar.Action icon="dots-vertical" />
+      </Appbar.Header>
+      <View className="py-5 px-4">
         <View className="h-25 flex-row justify-between">
           <Image source={{
-            uri: 'https://th.bing.com/th/id/OIP.QjynegEfQVPq5kIEuX9fWQHaFj?pid=ImgDet&rs=1',
+            uri: user.imgUrl,
             width: 100,
             height: 100,
           }} className="rounded-xl" />
           <View className="justify-center items-center grow">
-            <Text className="font-bold text-2xl">Gordon Norman</Text>
-            <Text className="text-base">@gordonnorman</Text>
+            <Text className="font-bold text-2xl">{`${user?.firstName} ${user?.lastName}`}</Text>
+            <Text className="text-base">{user?.email}</Text>
           </View>
         </View>
         <View className="my-8 p-5 flex-row justify-between border-t-2 border-b-2 border-gray-300">

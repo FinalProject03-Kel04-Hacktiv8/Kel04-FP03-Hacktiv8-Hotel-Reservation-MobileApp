@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react"
 import { View, Text, TextInput } from "react-native"
-import { AppBarHeader } from "../../components/Profile/AppBarHeader"
-import { Button } from "react-native-paper"
+import { Appbar, Button } from "react-native-paper"
 import { useDispatch } from "react-redux"
 import { onHandleCheckout } from "../../redux/slices/slice-book"
 import { useNavigation, useRoute } from "@react-navigation/core"
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 
 export const BookingPage = () => {
   const [name, setName] = useState('')
@@ -60,7 +60,21 @@ export const BookingPage = () => {
 
   return (
     <View>
-      <AppBarHeader title="Book Now" />
+      <Appbar.Header>
+        <Appbar.Action icon="keyboard-backspace" onPress={() => navigation.navigate("Home")} />
+        <Appbar.Content
+          title={
+            <Text className="text-lg">
+              <MaterialCommunityIcons name="cards-outline" size={26} />
+              Book{" "}
+              <Text className="text-purple-700 font-semibold">Now</Text>{" "}
+            </Text>
+          }
+          mode="center-aligned"
+          style={{ alignItems: "center" }}
+        />
+        <Appbar.Action icon="dots-vertical" />
+      </Appbar.Header>
       <View className="p-5 justify-between h-full">
         <View>
           <View>
