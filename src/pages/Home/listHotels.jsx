@@ -9,7 +9,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { ScrollView } from "react-native-gesture-handler";
 import { fetchDataList } from "../../redux/slices/slice-list";
 import List from "../../utils/API/properties/list";
-import { fetchDataLocation } from "../../redux/slices/slice-search";
+import {
+  fetchDataLocation,
+  updateIdSearch,
+} from "../../redux/slices/slice-search";
 import searchLocations from "../../utils/API/search/locations";
 import { checkIn, checkOut } from "../../utils/Date/checkIn-checkOut";
 
@@ -21,6 +24,7 @@ export default function ListHotels() {
   const route = useRoute();
   const { searchQuery, id } = route.params;
   const guest = 2;
+
   // Change This tobe your actions
   const handleBack = () => {
     navigation.navigate("Home");
@@ -64,11 +68,19 @@ export default function ListHotels() {
         console.error("Error:", error);
       }
     };
-    fetchData();
+    if (
+      searchQuery !== dataSearch.id ||
+      dataSearch.id === "" ||
+      existDataFetch === undefined ||
+      existDataFetch.length == 0
+    ) {
+      fetchData();
+      dispatch(updateIdSearch(searchQuery));
+    }
   }, [dataSearch, id]);
 
   console.log(existDataFetch);
-  console.log("id", id);
+  console.log("id", dataSearch.id);
 
   return (
     <View>

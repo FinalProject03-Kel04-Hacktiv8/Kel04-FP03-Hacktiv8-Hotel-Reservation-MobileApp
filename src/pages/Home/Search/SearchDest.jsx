@@ -13,7 +13,10 @@ import { GuestAmount } from "../../../components/Inputs/guestAmount";
 import { checkIn, checkOut } from "../../../utils/Date/checkIn-checkOut";
 import CardHotels from "../../../components/Cards/card-hotels";
 import { fetchDataList } from "../../../redux/slices/slice-list";
-import { fetchDataLocation } from "../../../redux/slices/slice-search";
+import {
+  fetchDataLocation,
+  updateIdSearch,
+} from "../../../redux/slices/slice-search";
 import List from "../../../utils/API/properties/list";
 import searchLocations from "../../../utils/API/search/locations";
 
@@ -63,11 +66,19 @@ export default function SearchDest() {
         console.error("Error:", error);
       }
     };
-    fetchData();
+    if (
+      searchQuery !== dataSearch.id ||
+      dataSearch.id === "" ||
+      existDataFetch === undefined ||
+      existDataFetch.length == 0
+    ) {
+      fetchData();
+      dispatch(updateIdSearch(searchQuery));
+    }
   }, [dataSearch, id]);
 
   console.log(existDataFetch);
-  console.log("id", id);
+  console.log("id", dataSearch.id);
 
   // Acation Back
   const handleBack = () => {

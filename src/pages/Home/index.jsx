@@ -9,11 +9,12 @@ import CardOffers from "../../components/Cards/card-offers";
 import HeaderHome from "../../components/Header/header-home";
 
 export default function Home() {
-  const { data } = useSelector((state) => state.search);
+  const { data, id } = useSelector((state) => state.search);
   const dataList = useSelector((state) => state.list.data);
 
   console.log("data search Home", data);
   console.log("data list Home", dataList);
+  // console.log("id Searh", id);
 
   return (
     <View>

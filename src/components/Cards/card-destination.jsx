@@ -15,19 +15,20 @@ export default function CardDestination() {
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const dataSearch = useSelector((state) => state.search.data);
+  const { data, id } = useSelector((state) => state.search);
 
   // Fetch Data
   const handleSearch = () => {
-    console.log("idSearch", text.toLowerCase());
-    console.log("Fetching data...");
-    // Fetch search
+    if (text != id) {
+      console.log("idSearch", text.toLowerCase());
+      console.log("Fetching data...");
+      // Fetch search
 
-    dispatch(fetchDataLocation(searchLocations(text.toLowerCase())));
+      dispatch(fetchDataLocation(searchLocations(text.toLowerCase())));
 
-    console.log("DataSearch fetched!");
-    console.log(dataSearch);
-
+      console.log("DataSearch fetched!");
+      console.log(data);
+    }
     navigation.navigate("SearchDest", {
       searchQuery: text,
       id: text.toLowerCase(),
@@ -85,7 +86,7 @@ export default function CardDestination() {
           {alert === false || value != "" ? (
             ""
           ) : (
-            <Text>Please input your guest!</Text>
+            <Text className="text-red-500">Please input your guest!</Text>
           )}
         </SafeAreaView>
 

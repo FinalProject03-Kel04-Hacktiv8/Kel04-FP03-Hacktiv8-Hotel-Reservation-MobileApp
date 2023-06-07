@@ -2,22 +2,30 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Card, Text } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchDataLocation } from "../../redux/slices/slice-search";
+import {
+  fetchDataLocation,
+  updateIdSearch,
+} from "../../redux/slices/slice-search";
 import searchLocations from "../../utils/API/search/locations";
 
 export default function CardOffers({ img, name }) {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const dataSearch = useSelector((state) => state.search.data);
+  const { data, id } = useSelector((state) => state.search);
 
-  const handleCategory = () => {
-    console.log(name);
-    console.log("Fetching data...");
-    // Fetch
-    dispatch(fetchDataLocation(searchLocations(name.toLowerCase())));
+  // const delay = (ms) => {
+  //   return new Promise((resolve) => setTimeout(resolve, ms));
+  // };
 
-    console.log("DataSearch fetched!");
-    console.log(dataSearch);
+  const handleCategory = async () => {
+    if (name != id) {
+      // Fetch
+      console.log(name);
+      console.log("Fetching data...");
+      dispatch(fetchDataLocation(searchLocations(name.toLowerCase())));
+      console.log("DataSearch fetched!");
+      console.log(data);
+    }
 
     navigation.navigate("ListHotels", {
       searchQuery: name,

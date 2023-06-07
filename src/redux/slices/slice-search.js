@@ -20,9 +20,14 @@ const searchSlice = createSlice({
     status: "idle",
     loading: false,
     data: [],
+    id: "",
     error: null,
   },
-  reducers: {},
+  reducers: {
+    updateIdSearch: (state, action) => {
+      state.id = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchDataLocation.pending, (state) => {
       state.status = "pending";
@@ -43,5 +48,7 @@ const searchSlice = createSlice({
     });
   },
 });
+
+export const { updateIdSearch } = searchSlice.actions;
 
 export default searchSlice.reducer;
