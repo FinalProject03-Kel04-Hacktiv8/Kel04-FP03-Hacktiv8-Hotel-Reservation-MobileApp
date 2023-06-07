@@ -7,6 +7,7 @@ import SearchDest from "./src/pages/Home/Search/SearchDest";
 import ListHotels from "./src/pages/Home/listHotels";
 import { store } from "./src/redux/store/store";
 import Detail from "./src/pages/Details/detail";
+import { BookingPage } from "./src/pages/Profile/bookingPage";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -34,6 +35,11 @@ export default function App() {
               <Stack.Screen
                 name="Detail"
                 component={Detail}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Booking"
+                component={BookingPage}
                 options={{ headerShown: false }}
               />
             </Stack.Group>

@@ -35,18 +35,6 @@ export default function Navbar() {
           tabBarIcon: () => <AntDesign name="profile" size={26} />,
         }}
       />
-
-      {/* this just a moment, delete after. Preview purpose only */}
-      {/* <Tab.Screen
-        name="BookingPage"
-        component={BookingPage}
-        options={{
-          tabBarLabel: "Book",
-          tabBarIcon: () => <AntDesign name="shoppingcart" size={26} />,
-        }}
-      /> */}
-      {/*  */}
-
       <Tab.Screen
         name="Settings"
         component={Settings}
