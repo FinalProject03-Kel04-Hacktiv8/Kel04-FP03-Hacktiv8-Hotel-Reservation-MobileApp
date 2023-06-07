@@ -1,19 +1,36 @@
-import { View, Text, Button } from "react-native";
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { StatusBar } from "expo-status-bar";
+import { ScrollView, View } from "react-native";
+import { Appbar, Text } from "react-native-paper";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import CardHotels from "../../components/Cards/card-hotels";
 
 export default function Favorites({ navigation, route }) {
+  const handleBack = () => {
+    navigation.navigate("Home");
+  };
+
   return (
-    <SafeAreaView className="flex-1 justify-center px-2">
-      <View className="relative border-2 items-center h-80">
-        <Text className="font-bold absolute">Favorite</Text>
-        <Button
-          title="Login"
-          onPress={() => navigation.navigate("Login", {prevRoute: route.name})}
+    <View>
+      <Appbar.Header>
+        <Appbar.Action icon="keyboard-backspace" onPress={handleBack} />
+        <Appbar.Content
+          title={
+            <Text className="text-lg">
+              <MaterialCommunityIcons name="cards-outline" size={26} />
+              Favo
+              <Text className="text-purple-700 font-semibold">rites</Text>{" "}
+            </Text>
+          }
+          mode="center-aligned"
+          style={{ alignItems: "center" }}
         />
-        <StatusBar style="auto" />
-      </View>
-    </SafeAreaView>
+        <Appbar.Action icon="dots-vertical" />
+      </Appbar.Header>
+      <ScrollView>
+        <View className="px-3">
+          <CardHotels />
+        </View>
+      </ScrollView>
+    </View>
   );
 }

@@ -36,6 +36,10 @@ export default function CardDestination() {
     });
   };
 
+  setTimeout(() => {
+    setAlert(false);
+  }, 2000);
+
   const handleErrors = () => {
     return setAlert(true);
   };

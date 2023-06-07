@@ -3,7 +3,10 @@ import React from "react";
 import { Image, Text, View } from "react-native";
 import { Card, Title } from "react-native-paper";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Entypo from "react-native-vector-icons/Entypo";
+import { addItem } from "../../redux/slices/slice-favorite";
+import { useDispatch } from "react-redux";
 
 export default function CardHotels({
   name,
@@ -20,7 +23,7 @@ export default function CardHotels({
     "https://cf.bstatic.com/xdata/images/hotel/max1024x768/282512224.jpg?k=042d99f7a6cb37dd9ed88c1ef0a1c5e7f50f75c1d5d51305297c0791bda77a04&o=";
   const getImgQuery = hotelPhoto.lastIndexOf("/");
   const urlImg = hotelPhoto.substring(getImgQuery + 1);
-
+  const dispatch = useDispatch();
   const navigation = useNavigation();
 
   const handleToDetail = () => {
@@ -36,19 +39,37 @@ export default function CardHotels({
     });
   };
 
+  const handleFavorite = () => {
+    dispatch(addItem());
+  };
+
   return (
     <Card className="my-3" onPress={handleToDetail}>
       <Card.Content className="p-0">
-        <Image
-          source={{
-            uri: `https://cf.bstatic.com/xdata/images/hotel/max1024x768/${urlImg}`,
-          }}
-          style={{
-            height: 200,
-            borderTopRightRadius: 10,
-            borderTopLeftRadius: 10,
-          }}
-        />
+        <View className="relative">
+          <Image
+            source={{
+              uri: `https://cf.bstatic.com/xdata/images/hotel/max1024x768/${urlImg}`,
+            }}
+            style={{
+              height: 200,
+              borderTopRightRadius: 10,
+              borderTopLeftRadius: 10,
+            }}
+          />
+
+          <Text
+            className="absolute top-4 right-5 text-red-500 font-bold bg-slate-200 rounded-full pr-1 pt-1"
+            onPress={handleFavorite}
+          >
+            {" "}
+            <MaterialIcons
+              className="absolute top-1 right-0"
+              name="favorite-border"
+              size={26}
+            />
+          </Text>
+        </View>
         <View className="px-3 py-2">
           <View className="flex flex-row items-center justify-between">
             <View>
