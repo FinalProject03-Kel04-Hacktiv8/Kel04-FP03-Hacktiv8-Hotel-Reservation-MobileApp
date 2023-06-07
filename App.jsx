@@ -8,6 +8,7 @@ import Navbar from "./src/components/Navbar";
 import SearchDest from "./src/pages/Home/Search/SearchDest";
 import ListHotels from "./src/pages/Home/listHotels";
 import Detail from "./src/pages/Details/detail";
+import { BookingPage } from "./src/pages/Profile/bookingPage";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -36,6 +37,11 @@ export default function App() {
                 <Stack.Screen
                   name="Detail"
                   component={Detail}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="Booking"
+                  component={BookingPage}
                   options={{ headerShown: false }}
                 />
               </Stack.Group>

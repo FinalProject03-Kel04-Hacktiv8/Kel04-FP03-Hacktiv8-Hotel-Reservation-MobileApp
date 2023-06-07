@@ -1,96 +1,87 @@
-import { View, Text, Image, FlatList, ScrollView } from "react-native";
 import React, { useEffect } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { View, Text, ScrollView, Image } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import Card from "../../components/Card";
+import { ItemBooked } from "../../components/Profile/ItemBooked";
 import { useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/core";
 import { Appbar } from "react-native-paper";
-import { useNavigation } from "@react-navigation/native";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 
-export default function Profile({}) {
+export default function Profile() {
+  const booked = useSelector(state => state.booked.booked)
+  const user = useSelector(state => state.user);
+  const auth = useSelector(state => state.auth);
   const navigation = useNavigation();
-
-  const user = useSelector((state) => state.user);
-  const auth = useSelector((state) => state.auth);
   console.log(auth.token);
 
   if (!auth.token) {
     return navigation.push("Login");
   }
 
-  return (
-    <>
-      <Appbar.Header>
-        <Appbar.BackAction onPress={() => navigation.goBack()} />
-        <Appbar.Content title="Profile" />
-      </Appbar.Header>
-      <View>
-        <View className="bg-white p-3 rounded-lg items-center">
-          <View className="w-20 h-20 rounded-full overflow-hidden border-2 border-slate-300">
-            <Image
-              className="w-full h-full"
-              source={{
-                uri: `${user.imgUrl}`
-              }}
-            />
-          </View>
-            <Text className="font-semibold text-lg mt-2">
-              {`${user?.firstName} ${user?.lastName}`}
-            </Text>
-            <Text className="text-slate-500">
-              {user?.email}
-            </Text>
-          <View className="w-full flex-row justify-around mt-5 pt-3 border-t border-slate-200">
-            <View>
-              <Text 
-                className="text-center">
-                Bokings
-              </Text>
-              <Text 
-                className="text-center font-semibold">
-                27
-              </Text>
-            </View>
-            <View>
-              <Text 
-                className="text-center">
-                Reviews
-              </Text>
-              <Text 
-                className="text-center font-semibold">
-                  12
-              </Text>
-            </View>
-            <View>
-              <Text 
-                className="text-center">
-                Favorites
-                </Text>
-              <Text 
-                className="text-center font-semibold">
-                50
-              </Text>
-            </View>
-          </View>
-        </View>
-        
-        <View className="mt-10 px-5">
-          <Text 
-            className="mb-3 text-lg font-medium">
-            Boking History
-          </Text>
+  useEffect(() => { }, [booked])
 
-          <FlatList
-            data={[
-              {title: "garden Hotel"}, 
-              {title: "Hora Umum Hotel"}
-            ]}
-            renderItem={({ item }) => <Card item={item} />}
-            keyExtractor={item => item.title}
-          />
+  return (
+    <ScrollView>
+      <Appbar.Header>
+        <Appbar.Action icon="keyboard-backspace" onPress={() => navigation.navigate("Home")} />
+        <Appbar.Content
+          title={
+            <Text className="text-lg">
+              <MaterialCommunityIcons name="cards-outline" size={26} />
+              <Text className="text-purple-700 font-semibold">Profile</Text>
+            </Text>
+          }
+          mode="center-aligned"
+          style={{ alignItems: "center" }}
+        />
+        <Appbar.Action icon="dots-vertical" />
+      </Appbar.Header>
+      <View className="py-5 px-4">
+        <View className="h-25 flex-row justify-between">
+          <Image source={{
+            uri: user.imgUrl,
+            width: 100,
+            height: 100,
+          }} className="rounded-xl" />
+          <View className="justify-center items-center grow">
+            <Text className="font-bold text-2xl">{`${user?.firstName} ${user?.lastName}`}</Text>
+            <Text className="text-base">{user?.email}</Text>
+          </View>
         </View>
-        <StatusBar style="auto" />
+        <View className="my-8 p-5 flex-row justify-between border-t-2 border-b-2 border-gray-300">
+          <View className="items-center">
+            <Text className="font-bold text-base">Bookings</Text>
+            <Text className="font-bold" style={{ color: '#1B9C85' }}>{booked.length}</Text>
+          </View>
+          <View className="items-center">
+            <Text className="font-bold text-base">Reviews</Text>
+            <Text className="font-bold" style={{ color: '#1B9C85' }}>0</Text>
+          </View>
+          <View className="items-center">
+            <Text className="font-bold text-base">Favorites</Text>
+            <Text className="font-bold" style={{ color: '#1B9C85' }}>0</Text>
+          </View>
+        </View>
+        <View>
+          {
+            booked.length > 0
+              ? booked.map(item => (
+                <ItemBooked
+                  key={item.data.id}
+                  img={item.data.img}
+                  title={item.data.title}
+                  location={item.data.location}
+                  rate={item.data.rate}
+                  currency={item.data.currency}
+                  price={item.data.price}
+                  guest={item.data.guest}
+                />
+              ))
+              : <Text className="text-base text-center mt-5">Your booking appear here.</Text>
+          }
+        </View>
       </View>
-    </>
+      <StatusBar style="auto" />
+    </ScrollView>
   );
 }

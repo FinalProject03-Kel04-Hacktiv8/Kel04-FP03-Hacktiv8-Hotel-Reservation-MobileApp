@@ -4,11 +4,13 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 import {
   ActivityIndicator,
   Appbar,
+  Button,
   MD2Colors,
   Paragraph,
 } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Entypo from "react-native-vector-icons/Entypo";
 import CardHotels from "../../components/Cards/card-hotels";
@@ -42,12 +44,15 @@ export default function Detail() {
       currency,
       rates,
       reviews,
+      Guest,
     });
   };
 
   const toggleShowFullText = () => {
     setShowFullText(!showFullText);
   };
+
+  const createStar = (num, numFloat) => Number(rates) < num ? Number(rates) < numFloat ? "star-o" : "star-half-o" : "star"
 
   return (
     <View>
@@ -85,7 +90,11 @@ export default function Detail() {
           </Text>
         </View>
         <View className="flex-row ml-3 absolute bottom-2 ">
-          <AntDesign name="star" color="#FAC213" size={20} />
+          <FontAwesome name={createStar(2, 1)} color='orange' size={16} style={{ marginRight: 5 }} />
+          <FontAwesome name={createStar(4, 3)} color='orange' size={16} style={{ marginRight: 5 }} />
+          <FontAwesome name={createStar(6, 5)} color='orange' size={16} style={{ marginRight: 5 }} />
+          <FontAwesome name={createStar(8, 7)} color='orange' size={16} style={{ marginRight: 5 }} />
+          <FontAwesome name={createStar(10, 9)} color='orange' size={16} style={{ marginRight: 5 }} />
           <Text className="ml-1 text-slate-50">
             {rates} | {reviews ?? "Haven't Review Yet"}
           </Text>
@@ -131,6 +140,20 @@ export default function Detail() {
           )}
         </View>
       </View>
+
+      {/* This button for testing only */}
+      <Button
+        className="mx-5 mt-10"
+        id="btncheckout"
+        buttonColor={"#1B9C85"}
+        textColor={"#fff"}
+        mode="contained"
+        onPress={handleBooking}
+      >
+        Book Now
+      </Button>
+      {/*  */}
+
     </View>
   );
 }
