@@ -26,21 +26,25 @@ export default function CardHotels({
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
+  const params = {
+    nameHotel: name,
+    city,
+    imgHotel: `https://cf.bstatic.com/xdata/images/hotel/max1024x768/${urlImg}`,
+    price,
+    currency,
+    rates,
+    reviews,
+    Guest,
+  };
+
   const handleToDetail = () => {
     navigation.navigate("Detail", {
-      nameHotel: name,
-      city,
-      imgHotel: `https://cf.bstatic.com/xdata/images/hotel/max1024x768/${urlImg}`,
-      price,
-      currency,
-      rates,
-      reviews,
-      Guest,
+      ...params,
     });
   };
 
-  const handleFavorite = () => {
-    dispatch(addItem());
+  const handleAddFavorite = () => {
+    dispatch(addItem({ ...params }));
   };
 
   return (
@@ -60,7 +64,7 @@ export default function CardHotels({
 
           <Text
             className="absolute top-4 right-5 text-red-500 font-bold bg-slate-200 rounded-full pr-1 pt-1"
-            onPress={handleFavorite}
+            onPress={handleAddFavorite}
           >
             {" "}
             <MaterialIcons
