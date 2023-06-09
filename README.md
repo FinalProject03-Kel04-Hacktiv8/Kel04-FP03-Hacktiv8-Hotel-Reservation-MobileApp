@@ -12,18 +12,20 @@ This is The Final Project for Hacktiv8 by Making The Mobile App using React Nati
 | Eki Alfani    | RCTN-KS07-010 |
 | Ardi Saputra  | RCTN-KS07-012 |
 
-## 👨 Login Admin & User
+## 👨 Login User
 
 | Account | Username        | Password |
 | ------- | --------------- | -------- |
 | User    | johnd@gmail.com | johnd123 |
+
+## 🖥️ Preview
 
 ## 🛠️ Tech Stack & Tools
 
 - React Native
 - Expo Cli
 - Redux Toolkit
-- NativeWind CSS
+- NativeWind Stylesheet
 - JavaScript
 - React Native Vector Icon
 - API from https://booking.com/
