@@ -59,8 +59,6 @@ export default function ListHotels() {
               )
             )
           );
-          // console.log("DataList fetched!");
-          // console.log(data);
         } else if (dataSearch.data.length == 0) {
           dispatch(fetchDataLocation(searchLocations(id)));
         }
