@@ -1,10 +1,15 @@
+import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import { ScrollView, View } from "react-native";
 import { Appbar, Text } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import CardHotels from "../../components/Cards/card-hotels";
+import { useSelector } from "react-redux";
 
-export default function Favorites({ navigation, route }) {
+export default function Favorites() {
+  const navigation = useNavigation();
+  const { items } = useSelector((state) => state.favorite);
+
   const handleBack = () => {
     navigation.navigate("Home");
   };
@@ -28,7 +33,19 @@ export default function Favorites({ navigation, route }) {
       </Appbar.Header>
       <ScrollView>
         <View className="px-3">
-          <CardHotels />
+          {items?.map((item, index) => (
+            <CardHotels
+              key={index}
+              name={item?.nameHotel}
+              city={item?.city}
+              imgHotel={item?.imgHotel}
+              price={item?.price}
+              currency={item?.currency}
+              reviews={item?.rates}
+              rates={item?.reviews}
+              Guest={item?.Guest}
+            />
+          ))}
         </View>
       </ScrollView>
     </View>

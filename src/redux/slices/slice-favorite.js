@@ -12,7 +12,7 @@ export const favoriteSlice = createSlice({
       const existingItem = state.items.find((item) => item.id === favItem.id);
 
       if (existingItem) {
-        existingItem.quantity++;
+        return;
       } else {
         state.items.push(favItem);
       }
@@ -69,6 +69,5 @@ export const favoriteSlice = createSlice({
   },
 });
 
-export const { addItem, updateStockCart, removeItem, clearItem, removeCart } =
-  favoriteSlice.actions;
+export const { addItem } = favoriteSlice.actions;
 export default favoriteSlice.reducer;
