@@ -9,7 +9,9 @@ export const favoriteSlice = createSlice({
   reducers: {
     addItem: (state, action) => {
       const favItem = action.payload;
-      const existingItem = state.items.find((item) => item.id === favItem.id);
+      const existingItem = state.items.find(
+        (item) => item.nameHotel === favItem.nameHotel
+      );
 
       if (existingItem) {
         return;
