@@ -1,12 +1,12 @@
 import { useNavigation } from "@react-navigation/core";
-import React from "react";
+import React, { useState } from "react";
 import { Image, Text, View } from "react-native";
 import { Card, Title } from "react-native-paper";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Entypo from "react-native-vector-icons/Entypo";
-import { addItem } from "../../redux/slices/slice-favorite";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { useDispatch } from "react-redux";
+import { addItem } from "../../redux/slices/slice-favorite";
 
 export default function CardHotels({
   name,
@@ -17,6 +17,7 @@ export default function CardHotels({
   rates,
   reviews,
   Guest,
+  Saved,
 }) {
   let hotelPhoto =
     imgHotel ??
@@ -25,7 +26,6 @@ export default function CardHotels({
   const urlImg = hotelPhoto.substring(getImgQuery + 1);
   const dispatch = useDispatch();
   const navigation = useNavigation();
-
   const params = {
     nameHotel: name,
     city,
@@ -37,6 +37,8 @@ export default function CardHotels({
     Guest,
   };
 
+  const [save, setSave] = useState(false);
+
   const handleToDetail = () => {
     navigation.navigate("Detail", {
       ...params,
@@ -44,7 +46,9 @@ export default function CardHotels({
   };
 
   const handleAddFavorite = () => {
-    dispatch(addItem({ ...params }));
+    dispatch(addItem({ ...params, Saved: true }));
+    setSave(true);
+    console.log("Saved");
   };
 
   return (
@@ -63,13 +67,13 @@ export default function CardHotels({
           />
 
           <Text
-            className="absolute top-4 right-5 text-red-500 font-bold bg-slate-200 rounded-full pr-1 pt-1"
+            className={`absolute top-4 right-5 text-red-500 font-bold bg-slate-200 rounded-full pr-1 pt-1`}
             onPress={handleAddFavorite}
           >
             {" "}
             <MaterialIcons
               className="absolute top-1 right-0"
-              name="favorite-border"
+              name={`${!Saved || save ? "favorite-border" : "favorite"}`}
               size={26}
             />
           </Text>
