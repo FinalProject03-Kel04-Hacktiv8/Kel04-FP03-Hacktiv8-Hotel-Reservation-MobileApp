@@ -14,6 +14,8 @@ export default function Favorites() {
     navigation.navigate("Home");
   };
 
+  console.log(items);
+
   return (
     <View>
       <Appbar.Header>
@@ -44,6 +46,7 @@ export default function Favorites() {
               reviews={item?.rates}
               rates={item?.reviews}
               Guest={item?.Guest}
+              Saved={item?.Saved}
             />
           ))}
         </View>
