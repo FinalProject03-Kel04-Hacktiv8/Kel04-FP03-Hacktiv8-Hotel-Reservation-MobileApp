@@ -5,8 +5,8 @@ import { Card, Title } from "react-native-paper";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Entypo from "react-native-vector-icons/Entypo";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import { useDispatch } from "react-redux";
-import { addItem } from "../../redux/slices/slice-favorite";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, removeItem } from "../../redux/slices/slice-favorite";
 
 export default function CardHotels({
   name,
@@ -37,7 +37,12 @@ export default function CardHotels({
     Guest,
   };
 
-  const [save, setSave] = useState(false);
+  const savedID = useSelector((state) => state.favorite.items);
+  const [save, setSave] = useState("favorite-border");
+
+  const existingItem = savedID.find(
+    (item) => item.nameHotel === params.nameHotel
+  );
 
   const handleToDetail = () => {
     navigation.navigate("Detail", {
@@ -45,10 +50,16 @@ export default function CardHotels({
     });
   };
 
-  const handleAddFavorite = () => {
-    dispatch(addItem({ ...params, Saved: true }));
-    setSave(true);
-    console.log("Saved");
+  const handleFavorite = () => {
+    if (save == "favorite-border" && !existingItem) {
+      dispatch(addItem({ ...params, Saved: "favorite" }));
+      setSave("favorite");
+      console.log("Saved");
+    } else if (Saved === "favorite" || existingItem?.save) {
+      setSave("favorite-border");
+      dispatch(removeItem(params.nameHotel));
+      console.log("Delete Saved");
+    }
   };
 
   return (
@@ -68,12 +79,12 @@ export default function CardHotels({
 
           <Text
             className={`absolute top-4 right-5 text-red-500 font-bold bg-slate-200 rounded-full pr-1 pt-1`}
-            onPress={handleAddFavorite}
+            onPress={handleFavorite}
           >
             {" "}
             <MaterialIcons
               className="absolute top-1 right-0"
-              name={`${!Saved || save ? "favorite-border" : "favorite"}`}
+              name={`${existingItem ? existingItem?.Saved : save}`}
               size={26}
             />
           </Text>
