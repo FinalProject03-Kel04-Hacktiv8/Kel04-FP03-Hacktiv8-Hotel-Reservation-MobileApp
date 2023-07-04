@@ -40,9 +40,9 @@ export default function CardHotels({
   const savedID = useSelector((state) => state.favorite.items);
   const [save, setSave] = useState("favorite-border");
 
-  const existingItem = savedID.find(
-    (item) => item.nameHotel === params.nameHotel
-  );
+  console.log(savedID);
+
+  const existingItem = savedID.find((item) => item.nameHotel === name);
 
   const handleToDetail = () => {
     navigation.navigate("Detail", {
@@ -57,7 +57,7 @@ export default function CardHotels({
       console.log("Saved");
     } else if (Saved === "favorite" || existingItem?.save) {
       setSave("favorite-border");
-      dispatch(removeItem(params.nameHotel));
+      dispatch(removeItem(name));
       console.log("Delete Saved");
     }
   };
