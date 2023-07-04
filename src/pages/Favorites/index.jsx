@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/core";
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView, View, Image } from "react-native";
 import { Appbar, Text } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import CardHotels from "../../components/Cards/card-hotels";
@@ -35,7 +35,16 @@ export default function Favorites() {
       </Appbar.Header>
       <ScrollView>
         {items.length === 0 ? (
-          <Text>Opps! Favorite lu kosong bro</Text>
+          <View className="flex items-center mt-40">
+            <Image
+              source={require("../../../assets/not-found.png")}
+              style={{ width: 200, height: 200 }}
+              resizeMode="contain"
+            />
+            <Text className="text-slate-500 font-bold">
+              Oops! you have no Favorites yet!
+            </Text>
+          </View>
         ) : (
           <View className="px-3">
             {items?.map((item, index) => (
