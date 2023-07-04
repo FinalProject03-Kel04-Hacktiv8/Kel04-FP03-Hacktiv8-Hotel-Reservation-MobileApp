@@ -22,11 +22,15 @@ export const favoriteSlice = createSlice({
     },
 
     removeItem: (state, action) => {
-      const id = action.payload.nameHotel;
-      const existingItem = state.items.find((item) => item.nameHotel === id);
+      const nameHotel = action.payload;
+      const existingItem = state.items.find(
+        (item) => item.nameHotel === nameHotel
+      );
 
       if (existingItem) {
-        state.items = state.items.filter((item) => item.nameHotel !== id);
+        state.items = state.items.filter(
+          (item) => item.nameHotel !== nameHotel
+        );
         state.totalQuantity--;
       }
     },
