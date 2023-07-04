@@ -40,8 +40,6 @@ export default function CardHotels({
   const savedID = useSelector((state) => state.favorite.items);
   const [save, setSave] = useState("favorite-border");
 
-  console.log(savedID);
-
   const existingItem = savedID.find((item) => item.nameHotel === name);
 
   const handleToDetail = () => {
