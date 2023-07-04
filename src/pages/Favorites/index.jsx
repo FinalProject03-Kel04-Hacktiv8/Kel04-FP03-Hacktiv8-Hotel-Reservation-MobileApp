@@ -14,7 +14,7 @@ export default function Favorites() {
     navigation.navigate("Home");
   };
 
-  console.log(items);
+  console.log(items.length);
 
   return (
     <View>
@@ -34,22 +34,26 @@ export default function Favorites() {
         <Appbar.Action icon="dots-vertical" />
       </Appbar.Header>
       <ScrollView>
-        <View className="px-3">
-          {items?.map((item, index) => (
-            <CardHotels
-              key={index}
-              name={item?.nameHotel}
-              city={item?.city}
-              imgHotel={item?.imgHotel}
-              price={item?.price}
-              currency={item?.currency}
-              reviews={item?.rates}
-              rates={item?.reviews}
-              Guest={item?.Guest}
-              Saved={item?.Saved}
-            />
-          ))}
-        </View>
+        {items.length === 0 ? (
+          <Text>Opps! Favorite lu kosong bro</Text>
+        ) : (
+          <View className="px-3">
+            {items?.map((item, index) => (
+              <CardHotels
+                key={index}
+                name={item?.nameHotel}
+                city={item?.city}
+                imgHotel={item?.imgHotel}
+                price={item?.price}
+                currency={item?.currency}
+                reviews={item?.rates}
+                rates={item?.reviews}
+                Guest={item?.Guest}
+                Saved={item?.Saved}
+              />
+            ))}
+          </View>
+        )}
       </ScrollView>
     </View>
   );
